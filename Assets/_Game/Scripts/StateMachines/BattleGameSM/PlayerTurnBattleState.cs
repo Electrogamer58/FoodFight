@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerTurnBattleState : BattleGameState
 {
     [SerializeField] Text _playerTurnTextUI = null;
+    [SerializeField] GameObject _playerTurnUI = null;
 
     int _playerTurnCount = 0;
 
@@ -13,7 +14,8 @@ public class PlayerTurnBattleState : BattleGameState
     {
         Debug.Log("Player Turn:... Entering");
         _playerTurnTextUI.gameObject.SetActive(true);
-            
+        _playerTurnUI.SetActive(true);
+
         _playerTurnCount++;
         _playerTurnTextUI.text = "Player Turn: " + _playerTurnCount.ToString();
 
@@ -28,7 +30,8 @@ public class PlayerTurnBattleState : BattleGameState
     public override void Exit()
     {
         _playerTurnTextUI.gameObject.SetActive(false);
-        
+        _playerTurnUI.SetActive(false);
+
         //unhook from events
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
         StateMachine.Input.PressedCancel -= OnPressedCancel;
