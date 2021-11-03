@@ -13,12 +13,16 @@ public class PlayerTurnBattleState : BattleGameState
     {
         Debug.Log("Player Turn:... Entering");
         _playerTurnTextUI.gameObject.SetActive(true);
-
+            
         _playerTurnCount++;
         _playerTurnTextUI.text = "Player Turn: " + _playerTurnCount.ToString();
 
         //hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
+        StateMachine.Input.PressedCancel += OnPressedCancel;
+        StateMachine.Input.PressedLeft += OnPressedLeft;
+        StateMachine.Input.PressedRight += OnPressedRight;
+
     }
 
     public override void Exit()
@@ -27,13 +31,44 @@ public class PlayerTurnBattleState : BattleGameState
         
         //unhook from events
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
+        StateMachine.Input.PressedCancel -= OnPressedCancel;
+        StateMachine.Input.PressedLeft -= OnPressedLeft;
+        StateMachine.Input.PressedRight -= OnPressedRight;
 
         Debug.Log("Player Turn:... Exiting");
     }
 
     void OnPressedConfirm()
     {
-        StateMachine.ChangeState<EnemyTurnBattleState>();
-        //change to enemy turn state
+        //GO FORWARD ONE MENU IF POSSIBLE
+
+        //IF NOT POSSIBLE, COMMIT ACTION AND CHANGE TO ENEMY TURN STATE
+        StateMachine.ChangeState<EnemyTurnBattleState>(); //change to enemy turn state
     }
+
+    void OnPressedCancel()
+    {
+        //GO BACK ONE MENU IF POSSIBLE
+    }
+
+    void OnPressedLeft()
+    {
+        //MOVE SELECTION OVER ONE LEFT, SCROLL IF AT EDGE
+    }
+
+    void OnPressedRight()
+    {
+        //MOVE SELECTION OVER ONE RIGHT, SCROLL IF AT EDGE
+    }
+
+    public void Win() //TEMP but may be used later for same logic
+    {
+        StateMachine.ChangeState<WinBattleState>();
+    }
+
+    public void Lose()
+    {
+        StateMachine.ChangeState<LoseBattleState>();
+    }
+    
 }

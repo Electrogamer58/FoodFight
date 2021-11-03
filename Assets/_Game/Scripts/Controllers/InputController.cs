@@ -9,6 +9,7 @@ public class InputController : MonoBehaviour
     public event Action PressedCancel = delegate { };
     public event Action PressedLeft = delegate { };
     public event Action PressedRight = delegate { };
+    public event Action PressedP = delegate { };
 
     // Update is called once per frame
     void Update()
@@ -17,6 +18,7 @@ public class InputController : MonoBehaviour
         DetectCancel();
         DetectLeft();
         DetectRight();
+        DetectPause();
     }
 
     private void DetectRight()
@@ -48,6 +50,14 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PressedConfirm?.Invoke();
+        }
+    }
+
+    private void DetectPause()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PressedP?.Invoke();
         }
     }
 }
