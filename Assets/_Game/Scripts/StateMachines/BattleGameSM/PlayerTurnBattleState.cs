@@ -56,12 +56,42 @@ public class PlayerTurnBattleState : BattleGameState
 
         if (EventSystem.current.currentSelectedGameObject == _battleUIController.SpellButton)
         {
+            //if (_battleUIController.SpellPanel.active)
             _battleUIController.ToSpellMenu(true);
             _battleUIController.AttackButton.SetActive(false);
             _battleUIController.LearnButton.SetActive(false);
 
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.FirstSpell);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnButton)
+        {
+            //if (_battleUIController.SpellPanel.active)
+            _battleUIController.ToLearnMenu(true);
+            _battleUIController.AttackButton.SetActive(false);
+            _battleUIController.SpellButton.SetActive(false);
+
+            //EventSystem.current.SetSelectedGameObject(null);
+            //EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnOption);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnSpellButton)
+        {
+            _battleUIController.LearnSpellMenu.SetActive(true);
+            _battleUIController.LearnStyleMenu.SetActive(false);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnSpellOption);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnStyleButton)
+        {
+            _battleUIController.LearnSpellMenu.SetActive(false);
+            _battleUIController.LearnStyleMenu.SetActive(true);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnStyleOption);
         }
     }
 
@@ -76,6 +106,17 @@ public class PlayerTurnBattleState : BattleGameState
 
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.SpellButton);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnButton)
+        {
+            //if (_battleUIController.SpellPanel.active)
+            _battleUIController.ToLearnMenu(false);
+            _battleUIController.AttackButton.SetActive(true);
+            _battleUIController.SpellButton.SetActive(true);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.LearnButton);
         }
     }
 

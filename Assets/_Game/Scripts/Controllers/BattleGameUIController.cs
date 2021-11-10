@@ -15,6 +15,9 @@ public class BattleGameUIController : MonoBehaviour
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] public GameObject SpellPanel;
+    [SerializeField] public GameObject LearnPanel;
+    [SerializeField] public GameObject LearnSpellMenu;
+    [SerializeField] public GameObject LearnStyleMenu;
 
     [Header("Buttons to Start Menu On")]
     [SerializeField] GameObject battleFirstButton;
@@ -26,6 +29,12 @@ public class BattleGameUIController : MonoBehaviour
     [SerializeField] public GameObject SpellButton;
     [SerializeField] public GameObject LearnButton;
     [SerializeField] public GameObject FirstSpell;
+    [SerializeField] public GameObject FirstLearnOption;
+    [SerializeField] public GameObject LearnSpellButton;
+    [SerializeField] public GameObject FirstLearnSpellOption;
+    [SerializeField] public GameObject LearnStyleButton;
+    [SerializeField] public GameObject FirstLearnStyleOption;
+
 
     BattleGameSM GameState;
     bool Paused = false;
@@ -116,6 +125,11 @@ public class BattleGameUIController : MonoBehaviour
     public void ToSpellMenu(bool active)
     {
         SpellPanel.SetActive(active);
+    }
+
+    public void ToLearnMenu(bool active)
+    {
+        LearnPanel.SetActive(active);
     }
 
     public void PressedPause()
