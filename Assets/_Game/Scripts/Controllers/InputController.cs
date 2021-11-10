@@ -47,7 +47,7 @@ public class InputController : MonoBehaviour
 
     private void DetectConfirm()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             PressedConfirm?.Invoke();
         }

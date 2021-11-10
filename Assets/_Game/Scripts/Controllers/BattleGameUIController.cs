@@ -8,16 +8,24 @@ using UnityEngine.EventSystems;
 public class BattleGameUIController : MonoBehaviour
 {
     [SerializeField] Text _enemyThinkingTextUI = null;
+    [SerializeField] Animator _UIAnimator = null;
 
     [Header("Menu Panels")]
     [SerializeField] GameObject battlePanel;
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject SettingsPanel;
+    [SerializeField] GameObject SpellPanel;
 
     [Header("Buttons to Start Menu On")]
     [SerializeField] GameObject battleFirstButton;
     [SerializeField] GameObject pauseFirstButton;
     [SerializeField] GameObject settingsFirstButton;
+
+    [Header("Battle UI Buttons")]
+    [SerializeField] public GameObject AttackButton;
+    [SerializeField] public GameObject SpellButton;
+    [SerializeField] public GameObject LearnButton;
+    [SerializeField] public GameObject FirstSpell;
 
     BattleGameSM GameState;
     bool Paused = false;
@@ -41,6 +49,30 @@ public class BattleGameUIController : MonoBehaviour
     {
         // make sure text is disabled on start
         _enemyThinkingTextUI.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == AttackButton)
+        {
+            _UIAnimator.SetBool("onAttack", true);
+            _UIAnimator.SetBool("onSpell", false);
+            _UIAnimator.SetBool("onLearn", false);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == SpellButton)
+        {
+            _UIAnimator.SetBool("onAttack",false);
+            _UIAnimator.SetBool("onSpell", true);
+            _UIAnimator.SetBool("onLearn", false);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == LearnButton)
+        {
+            _UIAnimator.SetBool("onAttack",false);
+            _UIAnimator.SetBool("onSpell", false);
+            _UIAnimator.SetBool("onLearn", true);
+        }
     }
 
     void OnEnemyTurnBegan()
@@ -79,6 +111,11 @@ public class BattleGameUIController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void ToSpellMenu(bool active)
+    {
+        SpellPanel.SetActive(active);
     }
 
     public void PressedPause()

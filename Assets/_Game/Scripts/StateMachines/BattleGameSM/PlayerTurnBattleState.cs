@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerTurnBattleState : BattleGameState
 {
     [SerializeField] Text _playerTurnTextUI = null;
     [SerializeField] GameObject _playerTurnUI = null;
+    [SerializeField] BattleGameUIController _battleUIController = null;
 
     int _playerTurnCount = 0;
 
@@ -44,14 +46,37 @@ public class PlayerTurnBattleState : BattleGameState
     void OnPressedConfirm()
     {
         //GO FORWARD ONE MENU IF POSSIBLE
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.AttackButton)
+        {
+            //IF NOT POSSIBLE, COMMIT ACTION AND CHANGE TO ENEMY TURN STATE
+            DelayHelper.DelayAction(this, GoToEnemyState, 4f);
+            //TODO PLAY ATTACK ANIMATION
+             //change to enemy turn state
+        }
 
-        //IF NOT POSSIBLE, COMMIT ACTION AND CHANGE TO ENEMY TURN STATE
-        StateMachine.ChangeState<EnemyTurnBattleState>(); //change to enemy turn state
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.SpellButton)
+        {
+            _battleUIController.ToSpellMenu(true);
+            _battleUIController.AttackButton.SetActive(false);
+            _battleUIController.LearnButton.SetActive(false);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.FirstSpell);
+        }
     }
 
     void OnPressedCancel()
     {
         //GO BACK ONE MENU IF POSSIBLE
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.SpellButton)
+        {
+            _battleUIController.ToSpellMenu(false);
+            _battleUIController.AttackButton.SetActive(true);
+            _battleUIController.LearnButton.SetActive(true);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.SpellButton);
+        }
     }
 
     void OnPressedLeft()
@@ -72,6 +97,11 @@ public class PlayerTurnBattleState : BattleGameState
     public void Lose()
     {
         StateMachine.ChangeState<LoseBattleState>();
+    }
+
+    void GoToEnemyState()
+    {
+        StateMachine.ChangeState<EnemyTurnBattleState>();
     }
     
 }
