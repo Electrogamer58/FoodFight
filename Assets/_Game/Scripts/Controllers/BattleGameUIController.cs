@@ -14,7 +14,7 @@ public class BattleGameUIController : MonoBehaviour
     [SerializeField] GameObject battlePanel;
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject SettingsPanel;
-    [SerializeField] GameObject SpellPanel;
+    [SerializeField] public GameObject SpellPanel;
 
     [Header("Buttons to Start Menu On")]
     [SerializeField] GameObject battleFirstButton;
