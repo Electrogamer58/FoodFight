@@ -34,6 +34,8 @@ public class BattleGameUIController : MonoBehaviour
     [SerializeField] public GameObject FirstLearnSpellOption;
     [SerializeField] public GameObject LearnStyleButton;
     [SerializeField] public GameObject FirstLearnStyleOption;
+    [SerializeField] public GameObject BackButton1;
+    [SerializeField] public GameObject BackButton2;
 
 
     BattleGameSM GameState;

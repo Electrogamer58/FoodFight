@@ -42,7 +42,7 @@ public class Health : MonoBehaviour, IDamageable
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _currentHealth = _maxHealth;
+        //_currentHealth = _maxHealth;
         _currentSugar = _maxSugar;
     }
 

@@ -21,6 +21,16 @@ public class PlayerTurnBattleState : BattleGameState
         _playerTurnCount++;
         _playerTurnTextUI.text = "Player Turn: " + _playerTurnCount.ToString();
 
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_battleUIController.AttackButton);
+
+        //reset menus
+        _battleUIController.ToSpellMenu(false);
+        _battleUIController.ToLearnMenu(false);
+        _battleUIController.AttackButton.SetActive(true);
+        _battleUIController.LearnButton.SetActive(true);
+        _battleUIController.SpellButton.SetActive(true);
+
         //hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
         StateMachine.Input.PressedCancel += OnPressedCancel;
@@ -46,15 +56,15 @@ public class PlayerTurnBattleState : BattleGameState
     void OnPressedConfirm()
     {
         //GO FORWARD ONE MENU IF POSSIBLE
-        if (EventSystem.current.currentSelectedGameObject == _battleUIController.AttackButton)
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.AttackButton) //pressed attack button
         {
             //IF NOT POSSIBLE, COMMIT ACTION AND CHANGE TO ENEMY TURN STATE
-            DelayHelper.DelayAction(this, GoToEnemyState, 4f);
+            DelayHelper.DelayAction(this, GoToEnemyState, 1f);
             //TODO PLAY ATTACK ANIMATION
              //change to enemy turn state
         }
 
-        if (EventSystem.current.currentSelectedGameObject == _battleUIController.SpellButton)
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.SpellButton) //pressed spell button
         {
             //if (_battleUIController.SpellPanel.active)
             _battleUIController.ToSpellMenu(true);
@@ -65,7 +75,7 @@ public class PlayerTurnBattleState : BattleGameState
             EventSystem.current.SetSelectedGameObject(_battleUIController.FirstSpell);
         }
 
-        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnButton)
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnButton) //pressed Learn button
         {
             //if (_battleUIController.SpellPanel.active)
             _battleUIController.ToLearnMenu(true);
@@ -76,7 +86,7 @@ public class PlayerTurnBattleState : BattleGameState
             //EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnOption);
         }
 
-        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnSpellButton)
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnSpellButton) //wants Learn spell
         {
             _battleUIController.LearnSpellMenu.SetActive(true);
             _battleUIController.LearnStyleMenu.SetActive(false);
@@ -85,13 +95,22 @@ public class PlayerTurnBattleState : BattleGameState
             EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnSpellOption);
         }
 
-        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnStyleButton)
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnStyleButton) //wants Learn Style
         {
             _battleUIController.LearnSpellMenu.SetActive(false);
             _battleUIController.LearnStyleMenu.SetActive(true);
 
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnStyleOption);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.BackButton1 || EventSystem.current.currentSelectedGameObject == _battleUIController.BackButton2) //going back
+        {
+            _battleUIController.LearnSpellMenu.SetActive(false);
+            _battleUIController.LearnStyleMenu.SetActive(false);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.LearnButton);
         }
     }
 
@@ -118,6 +137,15 @@ public class PlayerTurnBattleState : BattleGameState
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.LearnButton);
         }
+
+        if (EventSystem.current.currentSelectedGameObject == _battleUIController.BackButton1 || EventSystem.current.currentSelectedGameObject == _battleUIController.BackButton2) //going back
+        {
+            _battleUIController.LearnSpellMenu.SetActive(false);
+            _battleUIController.LearnStyleMenu.SetActive(false);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_battleUIController.LearnButton);
+        }
     }
 
     void OnPressedLeft()
@@ -140,9 +168,13 @@ public class PlayerTurnBattleState : BattleGameState
         StateMachine.ChangeState<LoseBattleState>();
     }
 
-    void GoToEnemyState()
+    public void GoToEnemyState()
     {
         StateMachine.ChangeState<EnemyTurnBattleState>();
     }
-    
+
+   
+
+   
+
 }

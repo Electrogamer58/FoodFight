@@ -26,7 +26,7 @@ public class PlayerHUD : MonoBehaviour
         _health = GetComponent<Health>();
 
         _healthBar.maxValue = _health._maxHealth;
-        _healthBar.value = _health._maxHealth;
+        _healthBar.value = _health._currentHealth;
 
         _sugarBar.maxValue = _health._maxSugar;
         _sugarBar.value = _health._currentSugar;
@@ -74,6 +74,21 @@ public class PlayerHUD : MonoBehaviour
 
 
 
+    }
+
+    void OnHealed()
+    {
+        float beforeAnimatedBarFillAmount = _healthBar.value;
+        Debug.Log("should fill at " + beforeAnimatedBarFillAmount);
+        //on damage, display new health
+        _healthBar.value = _health._currentHealth;
+        //continue animating
+        Transform damagedBar = Instantiate(damagedBarTemplate, transform);
+        damagedBar.gameObject.SetActive(true);
+        damagedBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(_healthBar.value * ANIMATED_BAR_WIDTH, damagedBar.GetComponent<RectTransform>().anchoredPosition.y);
+        Image damageBarImage = damagedBar.GetComponent<Image>();
+        //Debug.Log(damageBarImage);
+        damageBarImage.fillAmount = beforeAnimatedBarFillAmount - _healthBar.value;
     }
 
     private void DisableRedScreen()
