@@ -11,6 +11,9 @@ public class PlayerTurnBattleState : BattleGameState
     [SerializeField] BattleGameUIController _battleUIController = null;
 
     int _playerTurnCount = 0;
+    bool inLearnMenu = false;
+    bool inStyleMenu = false;
+    bool inSpellMenu = false;
 
     public override void Enter()
     {
@@ -27,16 +30,19 @@ public class PlayerTurnBattleState : BattleGameState
         //reset menus
         _battleUIController.ToSpellMenu(false);
         _battleUIController.ToLearnMenu(false);
+        _battleUIController.LearnSpellMenu.SetActive(false);
+        _battleUIController.LearnStyleMenu.SetActive(false);
+        //set Original 3 back to active
         _battleUIController.AttackButton.SetActive(true);
         _battleUIController.LearnButton.SetActive(true);
         _battleUIController.SpellButton.SetActive(true);
+      
 
         //hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
         StateMachine.Input.PressedCancel += OnPressedCancel;
         StateMachine.Input.PressedLeft += OnPressedLeft;
         StateMachine.Input.PressedRight += OnPressedRight;
-
     }
 
     public override void Exit()
@@ -59,7 +65,7 @@ public class PlayerTurnBattleState : BattleGameState
         if (EventSystem.current.currentSelectedGameObject == _battleUIController.AttackButton) //pressed attack button
         {
             //IF NOT POSSIBLE, COMMIT ACTION AND CHANGE TO ENEMY TURN STATE
-            DelayHelper.DelayAction(this, GoToEnemyState, 1f);
+            DelayHelper.DelayAction(this, GoToEnemyState, 0.5f);
             //TODO PLAY ATTACK ANIMATION
              //change to enemy turn state
         }
@@ -79,6 +85,7 @@ public class PlayerTurnBattleState : BattleGameState
         {
             //if (_battleUIController.SpellPanel.active)
             _battleUIController.ToLearnMenu(true);
+            inLearnMenu = true; 
             _battleUIController.AttackButton.SetActive(false);
             _battleUIController.SpellButton.SetActive(false);
 
@@ -89,6 +96,7 @@ public class PlayerTurnBattleState : BattleGameState
         if (EventSystem.current.currentSelectedGameObject == _battleUIController.LearnSpellButton) //wants Learn spell
         {
             _battleUIController.LearnSpellMenu.SetActive(true);
+            inSpellMenu = true;
             _battleUIController.LearnStyleMenu.SetActive(false);
 
             EventSystem.current.SetSelectedGameObject(null);
@@ -99,6 +107,7 @@ public class PlayerTurnBattleState : BattleGameState
         {
             _battleUIController.LearnSpellMenu.SetActive(false);
             _battleUIController.LearnStyleMenu.SetActive(true);
+            inStyleMenu = true;
 
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.FirstLearnStyleOption);
@@ -108,6 +117,8 @@ public class PlayerTurnBattleState : BattleGameState
         {
             _battleUIController.LearnSpellMenu.SetActive(false);
             _battleUIController.LearnStyleMenu.SetActive(false);
+            inSpellMenu = false;
+            inStyleMenu = false;
 
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.LearnButton);
@@ -131,6 +142,7 @@ public class PlayerTurnBattleState : BattleGameState
         {
             //if (_battleUIController.SpellPanel.active)
             _battleUIController.ToLearnMenu(false);
+            inLearnMenu = false;
             _battleUIController.AttackButton.SetActive(true);
             _battleUIController.SpellButton.SetActive(true);
 
@@ -142,6 +154,8 @@ public class PlayerTurnBattleState : BattleGameState
         {
             _battleUIController.LearnSpellMenu.SetActive(false);
             _battleUIController.LearnStyleMenu.SetActive(false);
+            inSpellMenu = false;
+            inStyleMenu = false;
 
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_battleUIController.LearnButton);
@@ -172,6 +186,8 @@ public class PlayerTurnBattleState : BattleGameState
     {
         StateMachine.ChangeState<EnemyTurnBattleState>();
     }
+
+    
 
    
 

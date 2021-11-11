@@ -1467,7 +1467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &489449337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 6
     m_SelectOnUp: {fileID: 786819267}
     m_SelectOnDown: {fileID: 1548411441}
     m_SelectOnLeft: {fileID: 0}
@@ -2697,6 +2697,11 @@ MonoBehaviour:
   _playerHealthComponent: {fileID: 1786601569}
   _playerAnimator: {fileID: 339417979}
   _playerTurnAccess: {fileID: 1336220157}
+  Spell2: {fileID: 489449336}
+  Spell3: {fileID: 1548411439}
+  Spell4: {fileID: 921640350}
+  Spell5: {fileID: 1602455002}
+  Spell6: {fileID: 0}
 --- !u!1 &786819265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,7 +2754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 2
     m_SelectOnUp: {fileID: 91964074}
     m_SelectOnDown: {fileID: 489449338}
     m_SelectOnLeft: {fileID: 0}
@@ -3128,7 +3133,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 893910824}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778306465}
+        m_MethodName: BuySpell4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336220157}
+        m_MethodName: GoToEnemyState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &893910824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3279,7 +3306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &921640351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3313,7 +3340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 6
     m_SelectOnUp: {fileID: 1548411441}
     m_SelectOnDown: {fileID: 1602455004}
     m_SelectOnLeft: {fileID: 0}
@@ -3605,7 +3632,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1000828585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778306465}
+        m_MethodName: BuySpell3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336220157}
+        m_MethodName: GoToEnemyState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1000828585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4331,7 +4380,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1185394610}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778306465}
+        m_MethodName: BuySpell5
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336220157}
+        m_MethodName: GoToEnemyState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1185394610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5838,7 +5909,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1506526086}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778306465}
+        m_MethodName: BuySpell2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336220157}
+        m_MethodName: GoToEnemyState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1506526086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6434,7 +6527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1548411440
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6468,7 +6561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 6
     m_SelectOnUp: {fileID: 489449338}
     m_SelectOnDown: {fileID: 921640352}
     m_SelectOnLeft: {fileID: 0}
@@ -6902,7 +6995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1602455003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6936,7 +7029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 6
     m_SelectOnUp: {fileID: 921640352}
     m_SelectOnDown: {fileID: 786819267}
     m_SelectOnLeft: {fileID: 0}
@@ -8755,7 +8848,7 @@ GameObject:
   m_Layer: 0
   m_Name: BattleUI
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

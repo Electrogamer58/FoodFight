@@ -14,6 +14,66 @@ public class SpellController : MonoBehaviour
     //public Animation _healingAnimation = null;
     AnimationClip animClip;
 
+    [Header("Spell Shop Buttons")]
+    public GameObject Spell2;
+    public GameObject Spell3;
+    public GameObject Spell4;
+    public GameObject Spell5;
+    public GameObject Spell6;
+
+
+    //NOTE: THERE IS DEFINITELY A BETTER WAY TO DO THIS. I WILL COME BACK TO THIS IF I HAVE TIME OR NEED TO EXPAND ON IT
+    bool canBuy2 = true;
+    bool canBuy3 = true;
+    bool canBuy4 = true;
+    bool canBuy5 = true;
+    bool canBuy6 = true;
+
+    public void BuySpell2()
+    {
+        if (canBuy2)
+        {
+            Spell2.SetActive(true);
+            canBuy2 = false;
+        }
+    }
+
+    public void BuySpell3()
+    {
+        if (canBuy3)
+        {
+            Spell3.SetActive(true);
+            canBuy3 = false;
+        }
+    }
+
+    public void BuySpell4()
+    {
+        if (canBuy4)
+        {
+            Spell4.SetActive(true);
+            canBuy4 = false;
+        }
+    }
+
+    public void BuySpell5()
+    {
+        if (canBuy5)
+        {
+            Spell5.SetActive(true);
+            canBuy5 = false;
+        }
+    }
+
+    public void BuySpell6()
+    {
+        if (canBuy6)
+        {
+            Spell6.SetActive(true);
+            canBuy6 = false;
+        }
+    }
+
     public void UsedHealingHaiku()
     {
         //hook into commands
