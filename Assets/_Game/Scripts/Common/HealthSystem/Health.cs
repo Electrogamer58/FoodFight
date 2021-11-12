@@ -25,6 +25,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound = null;
     public bool _isAlive = true;
+    public int _shieldAmt = 1;
 
 
     [Header("Drops")]
@@ -48,7 +49,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(int damage)
     {
-        _health._currentHealth -= damage;
+        _health._currentHealth -= damage/_shieldAmt;
         _health._currentHealth = Mathf.Clamp(_health._currentHealth, 0, _health._maxHealth);
         Damage();
 

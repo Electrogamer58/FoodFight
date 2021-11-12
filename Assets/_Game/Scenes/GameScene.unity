@@ -1530,7 +1530,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 489449339}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778306465}
+        m_MethodName: UsedCreatePancake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &489449339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2695,8 +2706,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealthComponent: {fileID: 1786601569}
+  _enemyHealthComponent: {fileID: 0}
   _playerAnimator: {fileID: 339417979}
   _playerTurnAccess: {fileID: 1336220157}
+  spellTurnCount: 0
   Spell2: {fileID: 489449336}
   Spell3: {fileID: 1548411439}
   Spell4: {fileID: 921640350}
@@ -5082,6 +5095,7 @@ MonoBehaviour:
   _playerTurnTextUI: {fileID: 285899656}
   _playerTurnUI: {fileID: 1949576090}
   _battleUIController: {fileID: 1544469569}
+  _spellController: {fileID: 778306465}
 --- !u!114 &1336220158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6590,7 +6604,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1548411442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778306465}
+        m_MethodName: UsedInAPickle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1548411442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8049,6 +8074,7 @@ MonoBehaviour:
   _impactParticles: {fileID: 0}
   _impactSound: {fileID: 0}
   _isAlive: 1
+  _shieldAmt: 1
   _dropSomething: 0
   _dropsMultipleThings: 0
   _objectToDrop: {fileID: 0}

@@ -9,6 +9,7 @@ public class PlayerTurnBattleState : BattleGameState
     [SerializeField] Text _playerTurnTextUI = null;
     [SerializeField] GameObject _playerTurnUI = null;
     [SerializeField] BattleGameUIController _battleUIController = null;
+    [SerializeField] SpellController _spellController = null;
 
     int _playerTurnCount = 0;
     bool inLearnMenu = false;
@@ -36,6 +37,11 @@ public class PlayerTurnBattleState : BattleGameState
         _battleUIController.AttackButton.SetActive(true);
         _battleUIController.LearnButton.SetActive(true);
         _battleUIController.SpellButton.SetActive(true);
+
+        if (_spellController.spellTurnCount > 0)
+        {
+            _spellController.spellTurnCount -= 1;
+        }
       
 
         //hook into events

@@ -5,10 +5,13 @@ using UnityEngine;
 public class SpellController : MonoBehaviour
 {
     [SerializeField] Health _playerHealthComponent = null;
+    [SerializeField] Health _enemyHealthComponent = null;
     [SerializeField] Animator _playerAnimator = null;
     [SerializeField] PlayerTurnBattleState _playerTurnAccess = null;
 
     private ICommand _spellCommand;
+
+    public int spellTurnCount = 0;
 
     [Header("Spell Animations")]
     //public Animation _healingAnimation = null;
@@ -84,16 +87,26 @@ public class SpellController : MonoBehaviour
 
     public void UsedCreatePancake()
     {
+        _enemyHealthComponent = FindObjectOfType<Health>();
         //hook into commands
-        //_spellCommand = new HealingHaiku(_healingAnimation, _playerHealthComponent);
+        _spellCommand = new CreatePancake(_playerAnimator, _enemyHealthComponent);
         _spellCommand.Execute();
+        _playerTurnAccess.GoToEnemyState();
     }
 
     public void UsedInAPickle()
     {
         //hook into commands
-        //_spellCommand = new HealingHaiku(_healingAnimation, _playerHealthComponent);
-        _spellCommand.Execute();
+        if (spellTurnCount == 0)
+        {
+            spellTurnCount = 3;
+            _spellCommand = new InAPickle(_playerAnimator, _playerHealthComponent);
+            _spellCommand.Execute();
+            _playerTurnAccess.GoToEnemyState();
+        } else
+        {
+            Debug.Log("Pickle already deployed.");
+        }
     }
 
     public void UsedExcalibread()
