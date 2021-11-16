@@ -11,14 +11,19 @@ public class InputController : MonoBehaviour
     public event Action PressedRight = delegate { };
     public event Action PressedP = delegate { };
 
+    public bool inputEnabled = true;
+
     // Update is called once per frame
     void Update()
     {
-        DetectConfirm();
-        DetectCancel();
-        DetectLeft();
-        DetectRight();
-        DetectPause();
+        if (inputEnabled)
+        {
+            DetectConfirm();
+            DetectCancel();
+            DetectLeft();
+            DetectRight();
+            DetectPause();
+        }
     }
 
     private void DetectRight()

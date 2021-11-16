@@ -82,15 +82,17 @@ public class SpellController : MonoBehaviour
         //hook into commands
         _spellCommand = new HealingHaiku(_playerAnimator, _playerHealthComponent);
         _spellCommand.Execute();
+        _playerHealthComponent.UseMagic();
         _playerTurnAccess.GoToEnemyState();
     }
 
     public void UsedCreatePancake()
     {
-        _enemyHealthComponent = FindObjectOfType<Health>();
+        _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
         //hook into commands
-        _spellCommand = new CreatePancake(_playerAnimator, _enemyHealthComponent);
+        _spellCommand = new CreatePancake(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
         _spellCommand.Execute();
+        _playerHealthComponent.UseMagic();
         _playerTurnAccess.GoToEnemyState();
     }
 
@@ -102,6 +104,7 @@ public class SpellController : MonoBehaviour
             spellTurnCount = 3;
             _spellCommand = new InAPickle(_playerAnimator, _playerHealthComponent);
             _spellCommand.Execute();
+            _playerHealthComponent.UseMagic();
             _playerTurnAccess.GoToEnemyState();
         } else
         {
@@ -111,16 +114,22 @@ public class SpellController : MonoBehaviour
 
     public void UsedExcalibread()
     {
+        _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
         //hook into commands
-        //_spellCommand = new HealingHaiku(_healingAnimation, _playerHealthComponent);
+        _spellCommand = new Excalibread(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
         _spellCommand.Execute();
+        _playerHealthComponent.UseMagic();
+        _playerTurnAccess.GoToEnemyState();
     }
 
     public void UsedLastStand()
     {
+        _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
         //hook into commands
-        //_spellCommand = new HealingHaiku(_healingAnimation, _playerHealthComponent);
+        _spellCommand = new LastStand(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
         _spellCommand.Execute();
+        _playerHealthComponent.UseMagic();
+        _playerTurnAccess.GoToEnemyState();
     }
 
     

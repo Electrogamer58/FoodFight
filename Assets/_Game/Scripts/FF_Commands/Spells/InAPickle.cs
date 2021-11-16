@@ -19,6 +19,7 @@ public class InAPickle : ICommand
         Debug.Log("Used In A Pickle");
         _animator.SetTrigger("heal");
 
+        _health._currentSugar -= 2;
         _health._shieldAmt = 2;
 
 

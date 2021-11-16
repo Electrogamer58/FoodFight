@@ -2,32 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealingHaiku : ICommand
+public class Excalibread : ICommand
 {
     private Animator _animator;
     private Health _health;
-   
-    public HealingHaiku(Animator animator, Health health)
+    private Health _enemyHealth;
+
+
+    public Excalibread(Animator animator, Health health, Health enemyHealth)
     {
         _animator = animator;
         _health = health;
-        
+        _enemyHealth = enemyHealth;
+
     }
 
     public void Execute()
     {
-        Debug.Log("Used Healing Haiku");
+        Debug.Log("Used Excalibread");
         _animator.SetTrigger("heal");
-        _health._currentSugar -= 3;
-        _health.TakeDamage(-30);
-        
+
+        _enemyHealth.TakeDamage(60);
+        _health._currentSugar -= 6;
+
         //_health._currentHealth += 30;
     }
 
     public void Undo()
     {
-        Debug.Log("UnUsed? Healing Haiku");
-        
+        Debug.Log("UnUsed? Excalibread");
+
         //_health._currentHealth -= 30;
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class BattleGameUIController : MonoBehaviour
 {
     [SerializeField] Text _enemyThinkingTextUI = null;
-    [SerializeField] Animator _UIAnimator = null;
+    [SerializeField] public Animator _UIAnimator = null;
 
     [Header("Menu Panels")]
     [SerializeField] GameObject battlePanel;
@@ -40,6 +40,7 @@ public class BattleGameUIController : MonoBehaviour
 
     BattleGameSM GameState;
     bool Paused = false;
+    public bool canChoose = true;
 
     private void OnEnable()
     {
@@ -64,25 +65,28 @@ public class BattleGameUIController : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == AttackButton)
+        if (canChoose)
         {
-            _UIAnimator.SetBool("onAttack", true);
-            _UIAnimator.SetBool("onSpell", false);
-            _UIAnimator.SetBool("onLearn", false);
-        }
+            if (EventSystem.current.currentSelectedGameObject == AttackButton)
+            {
+                _UIAnimator.SetBool("onAttack", true);
+                _UIAnimator.SetBool("onSpell", false);
+                _UIAnimator.SetBool("onLearn", false);
+            }
 
-        if (EventSystem.current.currentSelectedGameObject == SpellButton)
-        {
-            _UIAnimator.SetBool("onAttack",false);
-            _UIAnimator.SetBool("onSpell", true);
-            _UIAnimator.SetBool("onLearn", false);
-        }
+            if (EventSystem.current.currentSelectedGameObject == SpellButton)
+            {
+                _UIAnimator.SetBool("onAttack", false);
+                _UIAnimator.SetBool("onSpell", true);
+                _UIAnimator.SetBool("onLearn", false);
+            }
 
-        if (EventSystem.current.currentSelectedGameObject == LearnButton)
-        {
-            _UIAnimator.SetBool("onAttack",false);
-            _UIAnimator.SetBool("onSpell", false);
-            _UIAnimator.SetBool("onLearn", true);
+            if (EventSystem.current.currentSelectedGameObject == LearnButton)
+            {
+                _UIAnimator.SetBool("onAttack", false);
+                _UIAnimator.SetBool("onSpell", false);
+                _UIAnimator.SetBool("onLearn", true);
+            }
         }
     }
 

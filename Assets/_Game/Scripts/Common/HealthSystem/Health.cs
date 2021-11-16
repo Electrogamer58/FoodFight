@@ -7,6 +7,7 @@ using System;
 public class Health : MonoBehaviour, IDamageable
 {
     public event Action Damaged = delegate { };// event action in case player is damaged. For UI Purposes
+    public event Action UsedMagic = delegate { };
     public event Action Halved = delegate { };
     public event Action Died = delegate { };
 
@@ -68,6 +69,11 @@ public class Health : MonoBehaviour, IDamageable
     public void Die()
     {
         Died?.Invoke();
+    }
+
+    public void UseMagic()
+    {
+        UsedMagic?.Invoke();
     }
 
     //public virtual void Heal(int health)

@@ -38,12 +38,14 @@ public class PlayerHUD : MonoBehaviour
     {
         //subscribe to event
         _health.Damaged += OnDamaged;
+        _health.UsedMagic += OnMagic;
     }
 
     private void OnDisable()
     {
         //subscribe to event
         _health.Damaged -= OnDamaged;
+        _health.UsedMagic -= OnMagic;
     }
 
     void OnDamaged()
@@ -89,6 +91,11 @@ public class PlayerHUD : MonoBehaviour
         Image damageBarImage = damagedBar.GetComponent<Image>();
         //Debug.Log(damageBarImage);
         damageBarImage.fillAmount = beforeAnimatedBarFillAmount - _healthBar.value;
+    }
+
+    void OnMagic()
+    {
+        _sugarBar.value = _health._currentSugar;
     }
 
     private void DisableRedScreen()

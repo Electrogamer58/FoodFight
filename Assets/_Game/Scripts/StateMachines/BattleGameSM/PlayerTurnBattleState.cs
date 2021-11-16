@@ -10,6 +10,7 @@ public class PlayerTurnBattleState : BattleGameState
     [SerializeField] GameObject _playerTurnUI = null;
     [SerializeField] BattleGameUIController _battleUIController = null;
     [SerializeField] SpellController _spellController = null;
+    [SerializeField] public InputController _inputController = null;
 
     int _playerTurnCount = 0;
     bool inLearnMenu = false;
@@ -28,15 +29,8 @@ public class PlayerTurnBattleState : BattleGameState
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_battleUIController.AttackButton);
 
-        //reset menus
-        _battleUIController.ToSpellMenu(false);
-        _battleUIController.ToLearnMenu(false);
-        _battleUIController.LearnSpellMenu.SetActive(false);
-        _battleUIController.LearnStyleMenu.SetActive(false);
-        //set Original 3 back to active
-        _battleUIController.AttackButton.SetActive(true);
-        _battleUIController.LearnButton.SetActive(true);
-        _battleUIController.SpellButton.SetActive(true);
+        _battleUIController.canChoose = true;
+        _inputController.inputEnabled = true;
 
         if (_spellController.spellTurnCount > 0)
         {
@@ -54,7 +48,14 @@ public class PlayerTurnBattleState : BattleGameState
     public override void Exit()
     {
         _playerTurnTextUI.gameObject.SetActive(false);
-        _playerTurnUI.SetActive(false);
+        //_playerTurnUI.SetActive(false);
+
+        ResetMenus();
+        _battleUIController._UIAnimator.SetBool("onAttack", true);
+        _battleUIController._UIAnimator.SetBool("onSpell", false);
+        _battleUIController._UIAnimator.SetBool("onLearn", false);
+        _battleUIController.canChoose = false;
+        _inputController.inputEnabled = false;
 
         //unhook from events
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
@@ -193,6 +194,18 @@ public class PlayerTurnBattleState : BattleGameState
         StateMachine.ChangeState<EnemyTurnBattleState>();
     }
 
+    private void ResetMenus()
+    {
+        //reset menus
+        _battleUIController.ToSpellMenu(false);
+        _battleUIController.ToLearnMenu(false);
+        _battleUIController.LearnSpellMenu.SetActive(false);
+        _battleUIController.LearnStyleMenu.SetActive(false);
+        //set Original 3 back to active
+        _battleUIController.AttackButton.SetActive(true);
+        _battleUIController.LearnButton.SetActive(true);
+        _battleUIController.SpellButton.SetActive(true);
+    }
     
 
    
