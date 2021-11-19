@@ -13,7 +13,7 @@ public class EnemyTurnBattleState : BattleGameState
     [SerializeField] float _pauseDuration = 1.5f;
 
     [Header("My Animation and Stuff")]
-    [SerializeField] Animation myAnimation = null;
+    [SerializeField] Animator myAnimator = null;
 
     [Header("Attack Stats")]
     public int hitDC = 30;
@@ -50,7 +50,7 @@ public class EnemyTurnBattleState : BattleGameState
         {
             //ATTACK
             int myRoll = UnityEngine.Random.Range(1, 101);
-            _commandStack.ExecuteCommand(new Attack_Player(myAnimation, myRoll, hitDC, attackDamage));
+            _commandStack.ExecuteCommand(new Attack_Player(myAnimator, myRoll, hitDC, attackDamage));
 
         }
         if (actionRoll == 2)

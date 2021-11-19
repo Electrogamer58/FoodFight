@@ -79,57 +79,73 @@ public class SpellController : MonoBehaviour
 
     public void UsedHealingHaiku()
     {
-        //hook into commands
-        _spellCommand = new HealingHaiku(_playerAnimator, _playerHealthComponent);
-        _spellCommand.Execute();
-        _playerHealthComponent.UseMagic();
-        _playerTurnAccess.GoToEnemyState();
+        if (_playerHealthComponent._currentSugar >= 3)
+        {
+            //hook into commands
+            _spellCommand = new HealingHaiku(_playerAnimator, _playerHealthComponent);
+            _spellCommand.Execute();
+            _playerHealthComponent.UseMagic();
+            _playerTurnAccess.GoToEnemyState();
+        }
     }
 
     public void UsedCreatePancake()
     {
-        _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
-        //hook into commands
-        _spellCommand = new CreatePancake(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
-        _spellCommand.Execute();
-        _playerHealthComponent.UseMagic();
-        _playerTurnAccess.GoToEnemyState();
+        if (_playerHealthComponent._currentSugar >= 4)
+        {
+            _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
+            //hook into commands
+            _spellCommand = new CreatePancake(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
+            _spellCommand.Execute();
+            _playerHealthComponent.UseMagic();
+            _playerTurnAccess.GoToEnemyState();
+        }
     }
 
     public void UsedInAPickle()
     {
         //hook into commands
-        if (spellTurnCount == 0)
+        if (_playerHealthComponent._currentSugar >= 2)
         {
-            spellTurnCount = 3;
-            _spellCommand = new InAPickle(_playerAnimator, _playerHealthComponent);
-            _spellCommand.Execute();
-            _playerHealthComponent.UseMagic();
-            _playerTurnAccess.GoToEnemyState();
-        } else
-        {
-            Debug.Log("Pickle already deployed.");
+            if (spellTurnCount == 0)
+            {
+                spellTurnCount = 3;
+                _spellCommand = new InAPickle(_playerAnimator, _playerHealthComponent);
+                _spellCommand.Execute();
+                _playerHealthComponent.UseMagic();
+                _playerTurnAccess.GoToEnemyState();
+            }
+            else
+            {
+                Debug.Log("Pickle already deployed.");
+            }
         }
     }
 
     public void UsedExcalibread()
     {
-        _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
-        //hook into commands
-        _spellCommand = new Excalibread(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
-        _spellCommand.Execute();
-        _playerHealthComponent.UseMagic();
-        _playerTurnAccess.GoToEnemyState();
+        if (_playerHealthComponent._currentSugar >= 6)
+        {
+            _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
+            //hook into commands
+            _spellCommand = new Excalibread(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
+            _spellCommand.Execute();
+            _playerHealthComponent.UseMagic();
+            _playerTurnAccess.GoToEnemyState();
+        }
     }
 
     public void UsedLastStand()
     {
-        _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
-        //hook into commands
-        _spellCommand = new LastStand(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
-        _spellCommand.Execute();
-        _playerHealthComponent.UseMagic();
-        _playerTurnAccess.GoToEnemyState();
+        if (_playerHealthComponent._currentSugar >= 4)
+        {
+            _enemyHealthComponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Health>();
+            //hook into commands
+            _spellCommand = new LastStand(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
+            _spellCommand.Execute();
+            _playerHealthComponent.UseMagic();
+            _playerTurnAccess.GoToEnemyState();
+        }
     }
 
     

@@ -8,6 +8,7 @@ public class PlayerTurnBattleState : BattleGameState
 {
     [SerializeField] Text _playerTurnTextUI = null;
     [SerializeField] GameObject _playerTurnUI = null;
+    [SerializeField] Health _playerHealth = null;
     [SerializeField] BattleGameUIController _battleUIController = null;
     [SerializeField] SpellController _spellController = null;
     [SerializeField] public InputController _inputController = null;
@@ -31,6 +32,9 @@ public class PlayerTurnBattleState : BattleGameState
 
         _battleUIController.canChoose = true;
         _inputController.inputEnabled = true;
+
+        _playerHealth._currentSugar += 1;
+        _playerHealth.UseMagic();
 
         if (_spellController.spellTurnCount > 0)
         {
