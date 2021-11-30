@@ -9,15 +9,17 @@ public class Attack_Player : ICommand
     int _rolledNumber;
     int _rollToHit;
     int _damageToDeal;
+    Health _playerHealth;
     public static event Action HitPlayer;
     public static event Action MissedPlayer;
 
-    public Attack_Player(Animator animator, int rolledNumber, int rollToHit, int damageToDeal)
+    public Attack_Player(Animator animator, int rolledNumber, int rollToHit, int damageToDeal, Health playerHealth)
     {
         _animator = animator;
         _rolledNumber = rolledNumber;
         _rollToHit = rollToHit;
         _damageToDeal = damageToDeal;
+        _playerHealth = playerHealth;
     }
 
     public void Execute()
@@ -27,10 +29,14 @@ public class Attack_Player : ICommand
         if (_rolledNumber >= _rollToHit)
         {
             HitPlayer?.Invoke();
+            _playerHealth.TakeDamage(_damageToDeal);
+            Debug.Log("Dealt " + _damageToDeal + " to player");
+
         }
         if (_rolledNumber < _rollToHit)
         {
             MissedPlayer?.Invoke();
+            Debug.Log("Opponent Missed!");
         }
 
     }
