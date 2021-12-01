@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         myHealth.Damaged += OnDamaged;
     }
 
-    public IEnumerator EnemyThinkingRoutine(float pauseDuration)
+    public IEnumerator EnemyThinkingRoutine(float pauseDuration, AudioSource _audioSource, AudioClip _hitSound, AudioClip _missSound)
     {
         Debug.Log("Enemy thinking...");
         //CHOOSE RANDOM ACTION: ATTACK/HEAL
@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
         if (actionRoll == 1)
         {
             //ATTACK
-            Attack();
+            Attack(_audioSource, _hitSound, _missSound);
             myAnimator.SetTrigger("attack");
         }
         if (actionRoll == 2)
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
             //otherwise, attack
             else
             {
-                Attack();
+                Attack(_audioSource, _hitSound, _missSound);
                 myAnimator.SetTrigger("attack");
             }
             
@@ -108,11 +108,21 @@ public class Enemy : MonoBehaviour
             _enemyState.ChangeState();
     }
 
-    private void Attack()
+    private void Attack(AudioSource _audioSource, AudioClip _hitSound, AudioClip _missSound)
     {
         int AttackDamage = UnityEngine.Random.Range(minAttackDamage, maxAttackDamage);
         int myRoll = UnityEngine.Random.Range(1, 101);
         _commandStack.ExecuteCommand(new Attack_Player(myAnimator, myRoll, hitDC, AttackDamage, playerHealth));
+        if (myRoll > hitDC)
+        {
+            _audioSource.clip = _hitSound;
+            _audioSource.Play();
+        }
+        else
+        {
+            _audioSource.clip = _missSound;
+            _audioSource.Play();
+        }
     }
 
     private void Heal()

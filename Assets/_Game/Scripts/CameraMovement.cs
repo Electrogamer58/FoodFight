@@ -32,7 +32,7 @@ public class CameraMovement : MonoBehaviour
 
     void OnPlayerTurn()
     {
-        DelayHelper.DelayAction(this, TargetPlayer, .8f);
+        DelayHelper.DelayAction(this, TargetPlayer, .3f);
     }
 
     void OnEnemyTurn()

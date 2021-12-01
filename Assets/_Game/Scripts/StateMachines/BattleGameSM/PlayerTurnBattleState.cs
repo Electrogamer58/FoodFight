@@ -16,10 +16,15 @@ public class PlayerTurnBattleState : BattleGameState
     [SerializeField] SpellController _spellController = null;
     [SerializeField] public InputController _inputController = null;
 
+    [Header("Menu Buttons")]
+    [SerializeField] GameObject LoseButton;
+    [SerializeField] GameObject WinButton;
+
     int _playerTurnCount = 0;
     bool inLearnMenu = false;
     bool inStyleMenu = false;
     bool inSpellMenu = false;
+    bool UndidPickle = true;
     static public bool inGame = true;
 
     private void OnEnable()
@@ -57,12 +62,14 @@ public class PlayerTurnBattleState : BattleGameState
 
         if (_spellController.spellTurnCount > 0)
         {
+            UndidPickle = false;
             _spellController.spellTurnCount -= 1;
         }
 
-        if (_spellController.spellTurnCount == 0)
+        if (_spellController.spellTurnCount == 0 && !UndidPickle)
         {
             _spellController.UndoPickle();
+            UndidPickle = true;
         }
 
 
@@ -71,6 +78,15 @@ public class PlayerTurnBattleState : BattleGameState
         StateMachine.Input.PressedCancel += OnPressedCancel;
         StateMachine.Input.PressedLeft += OnPressedLeft;
         StateMachine.Input.PressedRight += OnPressedRight;
+    }
+
+    public override void Tick()
+    {
+        if (PlayerScore.EnemiesKilled == 1)
+        {
+            Win();
+            Debug.Log("Win!");
+        }
     }
 
     public override void Exit()
@@ -211,12 +227,18 @@ public class PlayerTurnBattleState : BattleGameState
     {
         StateMachine.ChangeState<WinBattleState>();
         inGame = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(WinButton);
     }
 
     public void Lose()
     {
         StateMachine.ChangeState<LoseBattleState>();
         inGame = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(LoseButton);
     }
 
     public void GoToEnemyState()

@@ -8,6 +8,10 @@ public class EnemyTurnBattleState : BattleGameState
     public static event Action EnemyTurnBegan;
     public static event Action EnemyTurnEnded;
 
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _hitSound;
+    [SerializeField] AudioClip _missSound;
+
     CommandStack _commandStack = new CommandStack();
 
     [SerializeField] float _pauseDuration = 1.5f;
@@ -27,7 +31,7 @@ public class EnemyTurnBattleState : BattleGameState
         if (currentEnemyObject == null)
         currentEnemy = FindObjectOfType<Enemy>();
 
-        StartCoroutine(currentEnemy.EnemyThinkingRoutine(_pauseDuration));
+        StartCoroutine(currentEnemy.EnemyThinkingRoutine(_pauseDuration, _audioSource, _hitSound, _missSound));
     }
 
     public override void Exit()

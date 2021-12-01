@@ -9,6 +9,10 @@ public class AttackController : MonoBehaviour
     [SerializeField] PlayerTurnBattleState _playerTurnAccess = null;
     [SerializeField] GameObject missText = null;
 
+    [SerializeField] AudioSource _audioSource = null;
+    [SerializeField] AudioClip _attackSound = null;
+    [SerializeField] AudioClip _missSound = null;
+
     public int damage = 5;
     public float accuracyMultiplier = 1.3f;
     float targetTime = 2f;
@@ -24,6 +28,16 @@ public class AttackController : MonoBehaviour
             _attackCommand = new PlayerAttack(_playerAnimator, damage, accuracyRoll, missText, _enemyHealthComponent);
             _attackCommand.Execute();
             _playerTurnAccess.GoToEnemyState();
+
+            if (accuracyRoll > 40)
+            {
+                _audioSource.clip = _attackSound;
+                _audioSource.Play();
+            } else
+            {
+                _audioSource.clip = _missSound;
+                _audioSource.Play();
+            }
         }
     }
 

@@ -88,7 +88,7 @@ MonoBehaviour:
     type: 3}
   _deathParticles: {fileID: 1063537778088434014, guid: ea5073ce5a858804398aedb7c04631b8,
     type: 3}
-  _impactSound: {fileID: 0}
+  _impactSound: {fileID: 8300000, guid: ee0262c055bc17d4a859629e38557763, type: 3}
   playerHealth: {fileID: 0}
   myHealth: {fileID: 0}
   hitDC: 30

@@ -6,12 +6,14 @@ public class SetupBattleState : BattleGameState
 {
     [SerializeField] int _startingSugar = 10;
     [SerializeField] int _numberOfPlayers = 2;
+    [SerializeField] GameObject WinUI;
 
     bool _activated = false;
 
     public override void Enter()
     {
         Debug.Log("Setup:... Entering");
+        WinUI.SetActive(false);
         Debug.Log("Creating " + _numberOfPlayers + " players.");
         //CANT change state while still in Enter()/Exit() transition! DONT put ChangeState<> here.
         _activated = false;
