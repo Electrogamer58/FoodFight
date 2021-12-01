@@ -82,7 +82,7 @@ public class PlayerTurnBattleState : BattleGameState
 
     public override void Tick()
     {
-        if (PlayerScore.EnemiesKilled == 1)
+        if (PlayerScore.EnemiesKilled == 2)
         {
             Win();
             Debug.Log("Win!");

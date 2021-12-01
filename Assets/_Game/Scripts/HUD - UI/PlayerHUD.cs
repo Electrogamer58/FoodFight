@@ -104,4 +104,13 @@ public class PlayerHUD : MonoBehaviour
         _redPanel.SetActive(false);
     }
 
+    public void UpdateHealthBar()
+    {
+        _healthBar.maxValue = _health._maxHealth;
+        _healthBar.value = _health._currentHealth;
+
+        _sugarBar.maxValue = _health._maxSugar;
+        _sugarBar.value = _health._currentSugar;
+    }
+
 }

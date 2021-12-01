@@ -1672,7 +1672,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-273900
+  m_Name: pb_Mesh247444
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2319,7 +2319,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16558
+  m_Name: pb_Mesh247108
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9495,7 +9495,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingSugar: 10
   _numberOfPlayers: 2
+  _playerHealth: {fileID: 1786601569}
   WinUI: {fileID: 376346483}
+  _playerHUD: {fileID: 1786601571}
 --- !u!114 &1336220156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9529,7 +9531,6 @@ MonoBehaviour:
   _inputController: {fileID: 882459454}
   LoseButton: {fileID: 1414539744}
   WinButton: {fileID: 1926570245}
-  WinUI: {fileID: 376346483}
 --- !u!114 &1336220158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32125,7 +32126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _currentHealth: 50
+  _currentHealth: 100
   _maxSugar: 10
   _currentSugar: 50
   _killDelay: 0
@@ -32837,7 +32838,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-274982
+  m_Name: pb_Mesh247640
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
