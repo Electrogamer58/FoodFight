@@ -12,14 +12,19 @@ public class EnemyTurnBattleState : BattleGameState
 
     [SerializeField] float _pauseDuration = 1.5f;
 
+    public GameObject currentEnemyObject;
     Enemy currentEnemy;
 
-    
+
 
     public override void Enter()
     {
         Debug.Log("Enemy Turn: ...Enter");
         EnemyTurnBegan?.Invoke();
+
+        if (currentEnemyObject != null)
+        currentEnemy = currentEnemyObject.GetComponent<Enemy>();
+        if (currentEnemyObject == null)
         currentEnemy = FindObjectOfType<Enemy>();
 
         StartCoroutine(currentEnemy.EnemyThinkingRoutine(_pauseDuration));
@@ -33,6 +38,7 @@ public class EnemyTurnBattleState : BattleGameState
 
     public void ChangeState()
     {
+        EnemyTurnEnded?.Invoke();
         StateMachine.ChangeState<PlayerTurnBattleState>();
     }
 }

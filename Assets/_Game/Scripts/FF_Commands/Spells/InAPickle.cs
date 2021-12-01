@@ -17,7 +17,7 @@ public class InAPickle : ICommand
     public void Execute()
     {
         Debug.Log("Used In A Pickle");
-        _animator.SetTrigger("heal");
+        _animator.SetTrigger("spell");
 
         _health._currentSugar -= 2;
         _health._shieldAmt = 2;

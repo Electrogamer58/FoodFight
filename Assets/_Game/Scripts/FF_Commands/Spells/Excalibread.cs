@@ -20,9 +20,9 @@ public class Excalibread : ICommand
     public void Execute()
     {
         Debug.Log("Used Excalibread");
-        _animator.SetTrigger("heal");
+        _animator.SetTrigger("bread");
 
-        _enemyHealth.TakeDamage(60);
+        DelayHelper.DelayAction(_enemyHealth, Damage, 2f);
         _health._currentSugar -= 6;
 
         //_health._currentHealth += 30;
@@ -33,5 +33,10 @@ public class Excalibread : ICommand
         Debug.Log("UnUsed? Excalibread");
 
         //_health._currentHealth -= 30;
+    }
+
+    void Damage()
+    {
+        _enemyHealth.TakeDamage(60);
     }
 }

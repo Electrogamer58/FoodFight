@@ -36,6 +36,7 @@ public class LoseBattleState : BattleGameState
     public void Restart()
     {
         StateMachine.ChangeState<SetupBattleState>();
+        SceneManager.LoadScene(1);
     }
 
     public void ToMenu()

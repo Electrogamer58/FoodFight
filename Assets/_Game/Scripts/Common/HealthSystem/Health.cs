@@ -25,8 +25,11 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] Health _health;
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound = null;
+    [SerializeField] GameObject _damageCounterPrefab;
+    [SerializeField] GameObject _UIController;
     public bool _isAlive = true;
     public int _shieldAmt = 1;
+    GameObject myDamageCounter;
 
 
     [Header("Drops")]
@@ -46,13 +49,24 @@ public class Health : MonoBehaviour, IDamageable
         _health = GetComponent<Health>();
         //_currentHealth = _maxHealth;
         _currentSugar = _maxSugar;
+
+        if (_UIController == null)
+        {
+            _UIController = FindObjectOfType<BattleGameUIController>().gameObject;
+            
+        }
     }
 
     public virtual void TakeDamage(int damage)
     {
         _health._currentHealth -= damage/_shieldAmt;
         _health._currentHealth = Mathf.Clamp(_health._currentHealth, 0, _health._maxHealth);
+
         Damage();
+
+        myDamageCounter = Instantiate(_damageCounterPrefab, transform.position, Quaternion.identity);
+        myDamageCounter.GetComponent<DamageCounter>()._text.text = " " + damage;
+        myDamageCounter.transform.SetParent(_UIController.transform);
 
         if (_currentHealth <= _maxHealth / 2) //if at half health, do something
         {
@@ -64,6 +78,12 @@ public class Health : MonoBehaviour, IDamageable
     {
         //Invoke the event appropriately
         Damaged?.Invoke(); // null check 
+
+        if (_currentHealth <= 0)
+        {
+            Die();
+            Kill(_killDelay);
+        }
     }
 
     public void Die()
@@ -101,8 +121,8 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Kill(float delay)
     {
-        DeathFeedback(_impactSound);
-        Die();
+        //DeathFeedback(_impactSound);
+        
         _isAlive = false;
 
         if (_dropSomething && !_dropsMultipleThings)
@@ -161,15 +181,6 @@ public class Health : MonoBehaviour, IDamageable
             gameObject.SetActive(false);
         }
 
-    }
-
-
-    private void Update()
-    {
-        if (_currentHealth <= 0)
-        {
-            Kill(_killDelay);
-        }
     }
 
 }

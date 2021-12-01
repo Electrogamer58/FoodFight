@@ -131,7 +131,7 @@ public class SpellController : MonoBehaviour
             _spellCommand = new Excalibread(_playerAnimator, _playerHealthComponent, _enemyHealthComponent);
             _spellCommand.Execute();
             _playerHealthComponent.UseMagic();
-            _playerTurnAccess.GoToEnemyState();
+            DelayHelper.DelayAction(this, _playerTurnAccess.GoToEnemyState, 3f);
         }
     }
 

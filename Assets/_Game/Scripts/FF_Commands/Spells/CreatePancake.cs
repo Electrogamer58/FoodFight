@@ -21,11 +21,9 @@ public class CreatePancake : ICommand
     {
         Debug.Log("Used Create Pancake");
         _health._currentSugar -= 4;
-        _animator.SetTrigger("heal");
+        _animator.SetTrigger("pancake");
 
-        _enemyHealth.TakeDamage(30);
-
-
+        DelayHelper.DelayAction(_enemyHealth, Damage, 2f);
         //_health._currentHealth += 30;
     }
 
@@ -34,5 +32,10 @@ public class CreatePancake : ICommand
         Debug.Log("UnUsed? Create Pancake");
 
         //_health._currentHealth -= 30;
+    }
+
+    void Damage()
+    {
+        _enemyHealth.TakeDamage(30);
     }
 }

@@ -19,14 +19,14 @@ public class LastStand : ICommand
     public void Execute()
     {
         Debug.Log("Used Last Stand");
-        _animator.SetTrigger("heal");
+        _animator.SetTrigger("spell");
 
         _health._currentSugar -= 4;
 
         if (_health._currentHealth < _health._maxHealth / 10)
         { //if below 10% health
             Debug.Log("STRONG!");
-            _enemyHealth.TakeDamage(50);
+            _enemyHealth.TakeDamage(80);
         } else
         {
             Debug.Log("Weak...");

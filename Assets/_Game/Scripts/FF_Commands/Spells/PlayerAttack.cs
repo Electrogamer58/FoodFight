@@ -24,7 +24,7 @@ public class PlayerAttack : ICommand
     public void Execute()
     {
         Debug.Log("Attacked Enemy!");
-        _animator.SetTrigger("heal");
+        _animator.SetTrigger("attack");
 
         if (_accuracyRoll > 40)
         {

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class PlayerTurnBattleState : BattleGameState
 {
+    public static event Action PlayerTurnStarted = delegate { };
+
     [SerializeField] Text _playerTurnTextUI = null;
     [SerializeField] GameObject _playerTurnUI = null;
     [SerializeField] Health _playerHealth = null;
@@ -17,10 +20,23 @@ public class PlayerTurnBattleState : BattleGameState
     bool inLearnMenu = false;
     bool inStyleMenu = false;
     bool inSpellMenu = false;
+    static public bool inGame = true;
+
+    private void OnEnable()
+    {
+        _playerHealth.Died += Lose;
+    }
+
+    private void OnDisable()
+    {
+        _playerHealth.Died -= Lose;
+    }
 
     public override void Enter()
     {
         Debug.Log("Player Turn:... Entering");
+        PlayerTurnStarted?.Invoke();
+
         _playerTurnTextUI.gameObject.SetActive(true);
         _playerTurnUI.SetActive(true);
 
@@ -76,7 +92,7 @@ public class PlayerTurnBattleState : BattleGameState
         if (EventSystem.current.currentSelectedGameObject == _battleUIController.AttackButton) //pressed attack button
         {
             //IF NOT POSSIBLE, COMMIT ACTION AND CHANGE TO ENEMY TURN STATE
-            DelayHelper.DelayAction(this, GoToEnemyState, 0.5f);
+            DelayHelper.DelayAction(this, GoToEnemyState, 10f);
             //TODO PLAY ATTACK ANIMATION
              //change to enemy turn state
         }
@@ -186,15 +202,18 @@ public class PlayerTurnBattleState : BattleGameState
     public void Win() //TEMP but may be used later for same logic
     {
         StateMachine.ChangeState<WinBattleState>();
+        inGame = false;
     }
 
     public void Lose()
     {
         StateMachine.ChangeState<LoseBattleState>();
+        inGame = false;
     }
 
     public void GoToEnemyState()
     {
+        if (inGame)
         StateMachine.ChangeState<EnemyTurnBattleState>();
     }
 
