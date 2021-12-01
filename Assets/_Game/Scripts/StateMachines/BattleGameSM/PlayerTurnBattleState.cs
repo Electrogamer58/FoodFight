@@ -52,11 +52,19 @@ public class PlayerTurnBattleState : BattleGameState
         _playerHealth._currentSugar += 1;
         _playerHealth.UseMagic();
 
+        if (_playerHealth._currentSugar > 10)
+            _playerHealth._currentSugar = 10;
+
         if (_spellController.spellTurnCount > 0)
         {
             _spellController.spellTurnCount -= 1;
         }
-      
+
+        if (_spellController.spellTurnCount == 0)
+        {
+            _spellController.UndoPickle();
+        }
+
 
         //hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
@@ -215,6 +223,11 @@ public class PlayerTurnBattleState : BattleGameState
     {
         if (inGame)
         StateMachine.ChangeState<EnemyTurnBattleState>();
+    }
+
+    public void RefreshState()
+    {
+        StateMachine.ChangeState<PlayerTurnBattleState>();
     }
 
     private void ResetMenus()

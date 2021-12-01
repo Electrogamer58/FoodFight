@@ -6,11 +6,13 @@ public class InAPickle : ICommand
 {
     private Animator _animator;
     private Health _health;
+    private GameObject _pickle;
 
-    public InAPickle(Animator animator, Health health)
+    public InAPickle(Animator animator, Health health, GameObject pickle)
     {
         _animator = animator;
         _health = health;
+        _pickle = pickle;
 
     }
 
@@ -21,6 +23,7 @@ public class InAPickle : ICommand
 
         _health._currentSugar -= 2;
         _health._shieldAmt = 2;
+        _pickle.SetActive(true);
 
 
         //_health._currentHealth += 30;
@@ -31,6 +34,7 @@ public class InAPickle : ICommand
         Debug.Log("UnUsed? In A Pickle");
 
         _health._shieldAmt = 1;
+        _pickle.SetActive(false);
 
         //_health._currentHealth -= 30;
     }

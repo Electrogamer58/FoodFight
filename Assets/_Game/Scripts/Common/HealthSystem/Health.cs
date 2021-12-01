@@ -65,7 +65,17 @@ public class Health : MonoBehaviour, IDamageable
         Damage();
 
         myDamageCounter = Instantiate(_damageCounterPrefab, transform.position, Quaternion.identity);
-        myDamageCounter.GetComponent<DamageCounter>()._text.text = " " + damage;
+        if (damage > 0)
+        {
+            myDamageCounter.GetComponent<DamageCounter>()._text.text = " " + damage / _shieldAmt;
+        } else if (damage < 0)
+        {
+            myDamageCounter.GetComponent<DamageCounter>()._text.text = "Healed!";
+        } else if (damage == 0)
+        {
+            myDamageCounter.GetComponent<DamageCounter>()._text.text = "Missed!";
+        }
+        
         myDamageCounter.transform.SetParent(_UIController.transform);
 
         if (_currentHealth <= _maxHealth / 2) //if at half health, do something

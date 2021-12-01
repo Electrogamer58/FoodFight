@@ -47,6 +47,15 @@ public class Enemy : MonoBehaviour
         if (myAnimator == null)
         {
             myAnimator = GetComponent<Animator>();
+            if (myAnimator == null)
+            {
+                gameObject.AddComponent<Animator>();
+            }
+        }
+
+        if (_enemySpawn == null)
+        {
+            _enemySpawn = GameObject.FindGameObjectWithTag("EnemySpawn").transform;
         }
     }
 
@@ -128,16 +137,21 @@ public class Enemy : MonoBehaviour
             _deathParticles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
         }
 
+        PlayerScore.EnemiesKilled += 1;
+        PlayerScore.Tastecoins += UnityEngine.Random.Range(10, 30);
+
         int enemyType = UnityEngine.Random.Range(1, 3);
             
         if (enemyType == 1)
         {
             _enemyState.currentEnemyObject = Instantiate(enemy1, _enemySpawn.position, Quaternion.identity);
+            Animator animator = _enemyState.currentEnemyObject.AddComponent<Animator>();
             Destroy(gameObject);
         }
         if (enemyType == 2)
         {
             _enemyState.currentEnemyObject = Instantiate(enemy2, _enemySpawn.position, Quaternion.identity);
+            Animator animator = _enemyState.currentEnemyObject.AddComponent<Animator>();
             Destroy(gameObject);
         }
 

@@ -36,6 +36,7 @@ public class Attack_Player : ICommand
         if (_rolledNumber < _rollToHit)
         {
             MissedPlayer?.Invoke();
+            _playerHealth.TakeDamage(0);
             Debug.Log("Opponent Missed!");
         }
 

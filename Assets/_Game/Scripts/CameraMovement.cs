@@ -32,10 +32,20 @@ public class CameraMovement : MonoBehaviour
 
     void OnPlayerTurn()
     {
-        target = _playerTransform;
+        DelayHelper.DelayAction(this, TargetPlayer, .8f);
     }
 
     void OnEnemyTurn()
+    {
+        DelayHelper.DelayAction(this, TargetEnemy, .8f);
+    }
+
+    void TargetPlayer()
+    {
+        target = _playerTransform;
+    }
+
+    void TargetEnemy()
     {
         target = _enemyTransform;
     }
