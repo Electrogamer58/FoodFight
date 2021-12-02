@@ -99,6 +99,7 @@ public class Health : MonoBehaviour, IDamageable
     public void Die()
     {
         Died?.Invoke();
+        AudioHelper.PlayClip2D(_impactSound, 1f);
     }
 
     public void UseMagic()

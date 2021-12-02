@@ -43,11 +43,13 @@ public class CameraMovement : MonoBehaviour
     void TargetPlayer()
     {
         target = _playerTransform;
+        offset.x *= -1;
     }
 
     void TargetEnemy()
     {
         target = _enemyTransform;
+        offset.x *= -1;
     }
 
     // Update is called once per frame

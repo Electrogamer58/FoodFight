@@ -37,6 +37,6 @@ public class Excalibread : ICommand
 
     void Damage()
     {
-        _enemyHealth.TakeDamage(60);
+        _enemyHealth.TakeDamage(140);
     }
 }

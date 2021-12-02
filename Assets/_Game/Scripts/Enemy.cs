@@ -14,11 +14,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] ParticleSystem _impactParticles = null;
     [SerializeField] ParticleSystem _deathParticles = null;
     [SerializeField] AudioClip _impactSound = null;
+    [SerializeField] AudioClip _deathSound = null;
 
 
     [Header("Attack Stats")]
     [SerializeField] Health playerHealth;
     [SerializeField] Health myHealth;
+    private EnemyHUD _enemyHUD;
     public int hitDC = 30;
     public int minAttackDamage = 1;
     public int maxAttackDamage = 10;
@@ -33,10 +35,16 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+
         _enemyState = FindObjectOfType<EnemyTurnBattleState>();
+
         if (myHealth == null)
         {
             myHealth = GetComponent<Health>();
+            myHealth._maxHealth *= PlayerScore.EnemiesKilled + 1;
+            myHealth._currentHealth = myHealth._maxHealth;
+            _enemyHUD = GetComponent<EnemyHUD>();
+            //_enemyHUD.UpdateHealthBar();
         }
 
         if (playerHealth == null)
@@ -148,7 +156,7 @@ public class Enemy : MonoBehaviour
         }
 
         PlayerScore.EnemiesKilled += 1;
-        PlayerScore.Tastecoins += UnityEngine.Random.Range(10, 30);
+        PlayerScore.Tastecoins += UnityEngine.Random.Range(25, 60);
 
         int enemyType = UnityEngine.Random.Range(1, 3);
             

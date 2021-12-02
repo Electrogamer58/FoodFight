@@ -10,6 +10,8 @@ public class SetupBattleState : BattleGameState
     [SerializeField] GameObject WinUI;
     [SerializeField] PlayerHUD _playerHUD = null;
 
+    [SerializeField] AudioClip _backgroundMusic;
+
     bool _activated = true;
 
     public override void Enter()
@@ -26,7 +28,10 @@ public class SetupBattleState : BattleGameState
         
         PlayerTurnBattleState.inGame = true;
         _playerHUD.UpdateHealthBar();
-        
+
+        MusicPlayer.MusicPlayer.Instance.Play(_backgroundMusic);
+
+
     }
 
     public override void Tick()

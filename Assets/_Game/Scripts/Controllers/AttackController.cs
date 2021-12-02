@@ -12,6 +12,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] AudioSource _audioSource = null;
     [SerializeField] AudioClip _attackSound = null;
     [SerializeField] AudioClip _missSound = null;
+    [SerializeField] AudioClip _upgradeSound = null;
 
     public int damage = 5;
     public float accuracyMultiplier = 1.3f;
@@ -64,13 +65,18 @@ public class AttackController : MonoBehaviour
     public void UpgradeDamage()
     {
         damage += Mathf.CeilToInt(5 + damage / 4);
+
         _playerTurnAccess.GoToEnemyState();
+        _audioSource.clip = _upgradeSound;
+        _audioSource.Play();
     }
 
     public void UpgradeAccuracy()
     {
         accuracyMultiplier += 0.2f;
         _playerTurnAccess.GoToEnemyState();
+        _audioSource.clip = _upgradeSound;
+        _audioSource.Play();
     }
 
 }

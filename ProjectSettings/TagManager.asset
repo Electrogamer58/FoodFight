@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - UIController
   - EnemySpawn
+  - Flash
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,6 +10,17 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] GameObject MainPanel;
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject CreditsPanel;
+
+    [SerializeField] AudioClip _musicA;
+    [SerializeField] GameObject _firstButton;
+
+    private void Awake()
+    {
+        MusicPlayer.MusicPlayer.Instance.Play(_musicA);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstButton);
+    }
 
     public void NewGame()
     {

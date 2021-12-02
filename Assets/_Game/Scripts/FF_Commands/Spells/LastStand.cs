@@ -26,7 +26,8 @@ public class LastStand : ICommand
         if (_health._currentHealth < _health._maxHealth / 10)
         { //if below 10% health
             Debug.Log("STRONG!");
-            _enemyHealth.TakeDamage(80);
+            _enemyHealth.TakeDamage(400);
+            _health.TakeDamage(-30);
         } else
         {
             Debug.Log("Weak...");
